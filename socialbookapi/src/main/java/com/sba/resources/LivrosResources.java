@@ -2,10 +2,12 @@ package com.sba.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,10 +44,10 @@ public class LivrosResources {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
 		return ResponseEntity.created(uri).build();
 	}
-	
-	//LISTAR COMENTARIOS
+
+	// LISTAR COMENTARIOS
 	@RequestMapping(value = "/{id}/comentarios", method = RequestMethod.GET)
-	public ResponseEntity<List<Comentario>> listarComentario(Long livroId){
+	public ResponseEntity<List<Comentario>> listarComentario(Long livroId) {
 		return ResponseEntity.status(HttpStatus.OK).body(livrosService.listarComentario(livroId));
 	}
 
@@ -58,7 +60,9 @@ public class LivrosResources {
 	// BUSCAR
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> buscar(@PathVariable("id") Long id) {
-		return ResponseEntity.status(HttpStatus.OK).body(livrosService.buscar(id));
+		// Sempre fazer CacheControl para retirar sobrecarga do servidor
+		CacheControl cacheControl = CacheControl.maxAge(20, TimeUnit.SECONDS);
+		return ResponseEntity.status(HttpStatus.OK).cacheControl(cacheControl).body(livrosService.buscar(id));
 	}
 
 	// ATUALIZAR
