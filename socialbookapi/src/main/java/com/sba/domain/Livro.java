@@ -21,18 +21,23 @@ public class Livro {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonInclude(Include.NON_NULL)
 	private Long id;
+	
 	@JsonInclude(Include.NON_NULL)
 	private String nome;
+	
 	@JsonInclude(Include.NON_NULL)
 	private Date publicacao;
+	
 	@JsonInclude(Include.NON_NULL)
 	private String editora;
+	
 	@JsonInclude(Include.NON_NULL)
 	private String resumo;
-	@Transient
-	// @OneToMany(mappedBy = "livro")
+	
+	@OneToMany(mappedBy = "livro")
 	@JsonInclude(Include.NON_NULL)
 	private List<Comentario> comentarios;
+	
 	@JsonInclude(Include.NON_NULL)
 	private String autor;
 

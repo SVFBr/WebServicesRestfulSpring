@@ -8,8 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -20,16 +21,20 @@ public class Comentario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonInclude(Include.NON_NULL)
 	private Long id;
+	
 	@JsonInclude(Include.NON_NULL)
 	private String texto;
+
 	@JsonInclude(Include.NON_NULL)
 	private String usuario;
+	
 	@JsonInclude(Include.NON_NULL)
 	private Date data;
-//	@ManyToMany(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "LIVRO_ID")
-//	@JsonInclude(Include.NON_NULL)
-//	private Livro livro;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "LIVRO_ID")
+	@JsonIgnore
+	private Livro livro;
 
 	public Long getId() {
 		return id;
@@ -63,13 +68,13 @@ public class Comentario {
 		this.data = data;
 	}
 
-//	public Livro getLivro() {
-//		return livro;
-//	}
-//
-//	public void setLivro(Livro livro) {
-//		this.livro = livro;
-//	}
+	public Livro getLivro() {
+		return livro;
+	}
+
+	public void setLivro(Livro livro) {
+		this.livro = livro;
+	}
 
 	
 }

@@ -12,4 +12,8 @@ public class LivroNaoEncontradoException extends RuntimeException {
 		super(message, cause);
 	}
 
+	public LivroNaoEncontradoException() {
+		// TODO Auto-generated constructor stub
+	}
+
 }

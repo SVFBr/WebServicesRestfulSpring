@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.sba.domain.Comentario;
 import com.sba.domain.Livro;
 import com.sba.service.LivrosService;
 
@@ -30,6 +31,16 @@ public class LivrosResources {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(livro.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
+
+	// SALVAR COMENTARIO
+	@RequestMapping(value = "/{id}/comentarios", method = RequestMethod.POST)
+	public ResponseEntity<Void> adicionarComentario(@PathVariable("id") Long livroId,
+			@RequestBody Comentario comentario) {
+		livrosService.salvarComentario(livroId, comentario);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
+		return ResponseEntity.created(uri).build();
+	}
+
 	// LISTAR
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Livro>> listar() {
