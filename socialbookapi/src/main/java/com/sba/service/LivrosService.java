@@ -12,6 +12,7 @@ import com.sba.domain.Livro;
 import com.sba.repository.ComentariosRepository;
 import com.sba.repository.LivrosRepository;
 import com.sba.service.exceptions.LivroNaoEncontradoException;
+import com.sba.service.exceptions.LivroNaoHaLivrosASeremListadosException;
 
 @Service
 public class LivrosService {
@@ -45,7 +46,7 @@ public class LivrosService {
 	// LISTAR
 	public List<Livro> listar() {
 		if (livrosRepository.findAll().isEmpty()) {
-			throw new LivroNaoEncontradoException();
+			throw new LivroNaoHaLivrosASeremListadosException();
 		}
 		return livrosRepository.findAll();
 	}

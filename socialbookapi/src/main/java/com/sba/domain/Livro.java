@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -27,6 +28,7 @@ public class Livro {
 	private String nome;
 	
 	@JsonInclude(Include.NON_NULL)
+	@JsonFormat(pattern = "dd/MM/yyy")
 	private Date publicacao;
 	
 	@JsonInclude(Include.NON_NULL)
@@ -36,7 +38,7 @@ public class Livro {
 	private String resumo;
 	
 	@OneToMany(mappedBy = "livro")
-	@JsonInclude(Include.NON_NULL)
+	@JsonInclude(Include.NON_EMPTY)
 	private List<Comentario> comentarios;
 	
 	@ManyToOne
