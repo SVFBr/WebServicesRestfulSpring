@@ -44,22 +44,19 @@ public class LivrosResources {
 	//LISTAR COMENTARIOS
 	@RequestMapping(value = "/{id}/comentarios", method = RequestMethod.GET)
 	public ResponseEntity<List<Comentario>> listarComentario(Long livroId){
-		List<Comentario> comentarios = livrosService.listarComentario(livroId);
-		return ResponseEntity.status(HttpStatus.OK).body(comentarios);
+		return ResponseEntity.status(HttpStatus.OK).body(livrosService.listarComentario(livroId));
 	}
 
 	// LISTAR
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Livro>> listar() {
-		List<Livro> livro = livrosService.listar();
-		return ResponseEntity.status(HttpStatus.OK).body(livro);
+		return ResponseEntity.status(HttpStatus.OK).body(livrosService.listar());
 	}
 
 	// BUSCAR
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> buscar(@PathVariable("id") Long id) {
-		Livro livro = livrosService.buscar(id);
-		return ResponseEntity.status(HttpStatus.OK).body(livro);
+		return ResponseEntity.status(HttpStatus.OK).body(livrosService.buscar(id));
 	}
 
 	// ATUALIZAR
