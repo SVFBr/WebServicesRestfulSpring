@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
+@JsonInclude(Include.NON_NULL)
 public class Livro {
 
 	@Id
@@ -29,16 +30,18 @@ public class Livro {
 	@JsonInclude(Include.NON_NULL)
 	private String resumo;
 	@Transient
-	//@OneToMany(mappedBy = "livro")
+	// @OneToMany(mappedBy = "livro")
 	@JsonInclude(Include.NON_NULL)
 	private List<Comentario> comentarios;
 	@JsonInclude(Include.NON_NULL)
 	private String autor;
-	
-	
 
 	public Livro() {
+	}
+
+	public Livro(String nome) {
 		super();
+		this.nome = nome;
 	}
 
 	public Long getId() {
