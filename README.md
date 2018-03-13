@@ -2,9 +2,7 @@
 Projeto SocialBookApi com Java e Spring Boot
 
 - 1º Cadastrar <Autor> -> POST http://localhost:8080/autores
-
 - 2º Cadastrar <Livro> -> POST http://localhost:8080/livros
-
 - 3º Cadastrar <Comentário> -> POST http://localhost:8080/livros/1/comentarios
 
 Alguns métodos:
